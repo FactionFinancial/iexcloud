@@ -5,10 +5,12 @@
 
 package iex
 
-// ExchangeRate models the exchange rate of a given currency pair.
-type ExchangeRate struct {
-	Date         Date    `json:"date"`
-	FromCurrency string  `json:"fromCurrency"`
-	ToCurrency   string  `json:"toCurrency"`
-	Rate         float64 `json:"rate"`
+import "time"
+
+// DataPoint models a single data point.
+type DataPoint struct {
+	Key         string    `json:"key"`
+	Weight      int       `json:"weight"`
+	Description string    `json:"description"`
+	LastUpdated time.Time `json:"lastUpdated"`
 }

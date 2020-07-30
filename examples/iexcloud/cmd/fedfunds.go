@@ -16,24 +16,23 @@ import (
 )
 
 func init() {
-	rootCmd.AddCommand(priceCmd)
+	rootCmd.AddCommand(fedFundsCmd)
 }
 
-var priceCmd = &cobra.Command{
-	Use:   "price [stock]",
-	Short: "Retrieve the current price for stock symbol",
-	Args:  cobra.ExactArgs(1),
+var fedFundsCmd = &cobra.Command{
+	Use:   "fedfunds",
+	Short: "Retrieve the effective federal funds rate",
+	Args:  cobra.ExactArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
-		stock := args[0]
 		cfg, err := domain.ReadConfig(configFileFlag)
 		if err != nil {
 			log.Fatalf("Error reading config file: %s", err)
 		}
 		client := iex.NewClient(cfg.Token, iex.WithBaseURL(cfg.BaseURL))
-		price, err := client.Price(context.Background(), stock)
+		rate, err := client.FederalFundsRate(context.Background())
 		if err != nil {
-			log.Fatalf("Error getting stock price: %s", err)
+			log.Fatalf("Error getting federal funds rate: %s", err)
 		}
-		fmt.Printf("Current price = $%.2f\n", price)
+		fmt.Printf("Effective federal funds rate = %f\n", rate)
 	},
 }

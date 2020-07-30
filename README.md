@@ -9,7 +9,10 @@ Go library for accessing the IEX Cloud API.
 ## Overview
 
 [iexcloud][] provides a Go interface to the [IEX Cloud API][1]. To
-access the [IEX Cloud API][1] an account and token are required.
+access the [IEX Cloud API][1] an account and token are required. The goal is
+for iexcloud to be compatible with the v1 version of the IEX Cloud API. There
+were some changes from the beta version to v1 of the API, so things may still
+be a in flux for this library.
 
 ## Installation
 
@@ -26,109 +29,276 @@ See the [iexcloud CLI example README][2].
 Below is a list of the APIs that have and have not been implemented. If
 you want a particular API to be developed next, please open an issue.
 
+### Introduction
+
+- [ ] Batch Requests
+
+### Guides
+
+- [ ] Time Series
+- [ ] Calendar
+- [x] Data Points
+- [ ] Files
+
+### Rules Engine
+
+- [ ] Rules Schema
+- [ ] Lookup Values
+- [ ] Creating a Rule
+- [ ] Pause and Unpause
+- [ ] Edit an Existing Rule
+- [ ] Delete a Rule
+- [ ] Get Rule Info
+- [ ] List All Rules
+- [ ] Getting Logged Outputs
+
 ### Account
 
+- [ ] Message Budget
 - [x] Metadata
-- [ ] Usage
 - [ ] Pay as you go
+- [ ] Signed Requests
+- [x] Usage
 
-### Stocks
+### API System Metadata
 
-- [x] Advanced Stats
-- [x] Balance Sheet
-- [ ] Batch Requests
+- [x] Status
+
+### Stock Prices
+
 - [x] Book
-- [x] Cash Flow
-- [x] Collections
-- [x] Company
+- [x] Charts — Use historical and intraday price endpoints.
 - [x] Delayed Quote
-- [x] Dividends
-- [x] Earnings
-- [x] Earnings Today
-- [x] Effective Spread (@FIXME: Has been removed from API.)
-- [x] Estimates
-- [x] Financials
-- [ ] Financials As Reported
-- [x] Fund Ownership
-- [x] Nondynamic Historical Prices
-- [ ] Dynamic Historical Prices
-- [x] Income Statement
+- [x] Extended Hours Quote — Use Quote.
+- [x] Historical Prices
+- [x] Intraday Prices
+- [x] Largest Trades
+- [x] Open / Close Price - Use OHLC.
+- [x] OHLC
+- [x] Previous Day Price
+- [x] Price Only
+- [x] Quote
+- [x] Real-time Quote — Use Quote.
+- [x] Volume by Venue
+
+### Stock Profiles
+
+- [x] Company
 - [x] Insider Roster
 - [x] Insider Summary
 - [x] Insider Transactions
-- [x] Institutional Ownership
-- [ ] IPO Calendar
-- [x] Key Stats
-- [x] Largest Trades
-- [x] List
 - [x] Logo
-- [x] Market Volume (U.S.)
-- [x] News
-- [x] OHLC
-- [x] Open / Close Price
-- [x] Peers
-- [x] Previous Day Prices
-- [x] Price
+- [x] Peer Groups
+
+### Stock Fundamentals
+
+- [x] Balance Sheet
+- [x] Cash Flow
+- [x] Dividends (Basic)
+- [x] Earnings
+- [x] Financials
+- [ ] Financials As Reported
+- [x] Income Statement
+- [ ] SEC Filings — Use the Financials As Reported endpoint for raw SEC filings
+      data.
+- [ ] Splits (Basic)
+
+### Stock Research
+
+- [x] Advanced Stats
+- [x] Analyst Recommendations
+- [x] Estimates
+- [x] Fund Ownership
+- [x] Institutional Ownership
+- [x] Key Stats
 - [x] Price Target
-- [x] Quote
-- [x] Recommendation Trends
-- [x] Relevant Stocks
-- [x] Sector Performance
+- [ ] Technical Indicators
+
+### Corporate Actions
+
+- [ ] Bonus Issue
+- [ ] Distribution
+- [ ] Dividends
+- [ ] Return of Capital
+- [ ] Rights Issue
+- [ ] Right to Purchase
+- [ ] Security Reclassification
+- [ ] Security Swap
+- [ ] Spinoff
 - [ ] Splits
-- [ ] Volume by Venue
 
-### Alternative Data
+### Market Info
 
-- [x] Crypto
-- [ ] Social Sentiment
-- [x] CEO Compensation
+- [x] Collections
+- [x] Earnings Today
+- [x] IPO Calendar
+- [x] List
+- [x] Market Volume (U.S.)
+- [x] Sector Performance
+- [x] Upcoming Events
 
-### Reference Data
+### News
 
-- [x] Symbols
-- [x] IEX Symbols
-- [x] U.S. Exchanges
-- [x] U.S. Holidays and Trading Days
-- [x] Stock Tags
-- [x] Stock Collections
-- [x] Mutual Fund Symbols
-- [x] OTC Symbols
-- [x] FX Symbols
-- [ ] Options Symbols
-- [ ] Commodities Symbols
-- [ ] Bonds Symbols
-- [x] Crypto Symbols
+- [x] News
+- [ ] Streaming News
+- [ ] Historical News
+
+### Cryptocurrency
+
+- [ ] Cryptocurrency Book
+- [ ] Cryptocurrency Events
+- [ ] Cryptocurrency Price
+- [ ] Cryptocurrency Quote
 
 ### Forex / Currencies
 
-- [x] Exchange Rates
+- [ ] Real-time Streaming
+- [ ] Latest Currency Rates
+- [ ] Currency Conversion
+- [ ] Historical Daily
+
+### Options
+
+- [ ] End of Day Options
+
+### Social Sentiment
+
+- [ ] Social Sentiment
+
+### CEO Compensation
+
+- [x] CEO Compensation
+
+### Treasuries
+
+- [ ] Daily Treasury Rates
+
+### Commodities
+
+- [x] Oil Prices
+- [x] Natural Gas Price
+- [x] Heating Oil Prices
+- [x] Jet Fuel Prices
+- [x] Diesel Price
+- [x] Gas Prices
+- [x] Propane Prices
+
+### Economic Data
+
+- [x] CD Rates
+- [x] Consumer Price Index
+- [x] Credit Card Interest Rate
+- [x] Federal Fund Rates
+- [ ] Real GDP
+- [ ] Institutional Money Funds
+- [ ] Initial Claims
+- [ ] Industrial Production Index
+- [ ] Mortgage Rates
+- [ ] Total Housing Starts
+- [ ] Total Payrolls
+- [ ] Total Vehicle Sales
+- [ ] Retail Money Funds
+- [ ] Unemployment Rates
+- [ ] US Recession Probabilities
+
+### Reference Data
+
+- [ ] Search
+- [x] Cryptocurrency Symbols
+- [x] FX Symbols
+- [x] IEX Symbols
+- [ ] International Symbols
+- [ ] International Exchanges
+- [ ] ISIN Mapping
+- [x] Mutual Fund Symbols
+- [ ] Options Symbols
+- [x] OTC Symbols
+- [x] Sectors
+- [x] Symbols
+- [x] Tags
+- [x] U.S. Exchanges
+- [x] U.S. Holidays and Trading Days
 
 ### Investors Exchange Data
 
-- [x] TOPS
-- [x] Last
 - [x] DEEP
 - [ ] DEEP Auction
 - [x] DEEP Book
 - [ ] DEEP Operational Halt Status
 - [ ] DEEP Official Price
 - [ ] DEEP Security Event
-- [ ] DEEP Short Sale Price Tst Status
+- [ ] DEEP Short Sale Price Test Status
 - [ ] DEEP System Event
 - [x] DEEP Trades
 - [ ] DEEP Trade Break
 - [ ] DEEP Trading Status
+- [x] Last
 - [ ] Listed Regulation SHO Threshold Securities List
-- [ ] Listed Short Interest List
 - [ ] Stats Historical Daily
 - [ ] Stats Historical Summary
 - [x] Stats Intraday
 - [ ] Stats Recent
 - [ ] Stats Records
+- [x] TOPS
 
-### API System Metadata
+### Wall Street Horizon
 
-- [x] Status
+- [ ] Analyst Days
+- [ ] Board of Directors Meeting
+- [ ] Business Updates
+- [ ] Buybacks
+- [ ] Capital Markets Day
+- [ ] Company Travel
+- [ ] Filing Due Dates
+- [ ] Fiscal Quarter End
+- [ ] Forum
+- [ ] General Conference
+- [ ] FDA Advisory Committee Meetings
+- [ ] Holidays
+- [ ] Index Changes
+- [ ] IPOs
+- [ ] Legal Actions
+- [ ] Mergers & Acquisitions
+- [ ] Product Events
+- [ ] Research and Development Days
+- [ ] Same Store Sales
+- [ ] Secondary Offerings
+- [ ] Seminars
+- [ ] Shareholder Meetings
+- [ ] Summit Meetings
+- [ ] Trade Shows
+- [ ] Witching Hours
+- [ ] Workshops
+
+### Fraud Factors
+
+- [ ] Similarity Index
+- [ ] Non-Timely Filings
+
+### ExtractAlpha
+
+### Precision Alpha
+
+- [ ] Precision Alpha Price Dynamics
+
+### BRAIN Company
+
+### Kavout
+
+- [ ] K Score for US Equities
+
+### Audit Analytics
+
+- [ ] Audit Analytics Director and Officer Changes
+- [ ] Audit Analytics Accounting Quality and Risk Matrix
+
+### ValuEngine
+
+- [ ] ValuEngine Stock Research Report
+
+### Need to Reclassify/Remove
+
+- [x] Relevant Stocks
 
 ## Contributing
 

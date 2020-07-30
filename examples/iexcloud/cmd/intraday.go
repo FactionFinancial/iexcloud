@@ -7,6 +7,7 @@ package cmd
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 
@@ -16,12 +17,12 @@ import (
 )
 
 func init() {
-	rootCmd.AddCommand(priceCmd)
+	rootCmd.AddCommand(intradayCmd)
 }
 
-var priceCmd = &cobra.Command{
-	Use:   "price [stock]",
-	Short: "Retrieve the current price for stock symbol",
+var intradayCmd = &cobra.Command{
+	Use:   "intraday [stock]",
+	Short: "Retrieve the intraday price for stock symbol",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		stock := args[0]
@@ -30,10 +31,15 @@ var priceCmd = &cobra.Command{
 			log.Fatalf("Error reading config file: %s", err)
 		}
 		client := iex.NewClient(cfg.Token, iex.WithBaseURL(cfg.BaseURL))
-		price, err := client.Price(context.Background(), stock)
+		ip, err := client.IntradayPrices(context.Background(), stock)
 		if err != nil {
-			log.Fatalf("Error getting stock price: %s", err)
+			log.Fatalf("Error getting intraday price: %s", err)
 		}
-		fmt.Printf("Current price = $%.2f\n", price)
+		b, err := json.MarshalIndent(ip, "", "  ")
+		if err != nil {
+			log.Fatalf("Error marshaling into JSON: %s", err)
+		}
+		fmt.Println("## Intraday Prices ##")
+		fmt.Println(string(b))
 	},
 }
